@@ -20,9 +20,20 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          predicates:
+            - Path=/order-service/**
+
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          predicates:
+            - Path=/catalog-service/**
         - id: user-service
           uri: lb://USER-SERVICE
-#         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
           predicates:
             - Path=/user-service/**
           filters:
@@ -33,9 +44,9 @@ spring:
             - Path=/second-service/**
           filters:
             - CustomFilter
-#            추가적인 파라미터 넣을 때 name 넣는다.
-            - name : CustomFilter
-            - name : LoggingFilter
+            #            추가적인 파라미터 넣을 때 name 넣는다.
+            - name: CustomFilter
+            - name: LoggingFilter
               args:
                 baseMessage: Hi, there
                 preLogger: true

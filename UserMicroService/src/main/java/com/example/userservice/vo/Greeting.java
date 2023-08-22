@@ -16,5 +16,4 @@ public class Greeting {
     private String message;
 
 
-
 }

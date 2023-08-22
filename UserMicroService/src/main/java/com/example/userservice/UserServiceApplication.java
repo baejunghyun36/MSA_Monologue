@@ -18,7 +18,7 @@ public class UserServiceApplication {
     //가장 먼저 호출되는 기동 클래스에서 Bean으로 등록해야한다.
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

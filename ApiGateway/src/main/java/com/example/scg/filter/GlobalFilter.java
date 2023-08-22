@@ -35,7 +35,7 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
             }
             // Custom Post Filter
             //비동기 방식으로 지원할 때 단일값 Mono 타입을 전달.
-            return chain.filter(exchange).then(Mono.fromRunnable(()-> {
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 if (config.isPreLogger()) {
                     log.info("Custom Filter End : response code -> {}", response.getStatusCode());
                 }

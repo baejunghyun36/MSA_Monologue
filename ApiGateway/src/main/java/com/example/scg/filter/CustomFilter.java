@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 
-
 @Component
 @Slf4j
 public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Config> {
@@ -30,7 +29,7 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
 
             // Custom Post Filter
             //비동기 방식으로 지원할 때 단일값 Mono 타입을 전달.
-            return chain.filter(exchange).then(Mono.fromRunnable(()-> {
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 log.info("Custom POST filter : response code -> {}", response.getStatusCode());
             }));
         };

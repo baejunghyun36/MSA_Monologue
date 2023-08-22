@@ -59,17 +59,17 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<ResponseUser>> getUsers(){
+    public ResponseEntity<List<ResponseUser>> getUsers() {
         Iterable<UserEntity> userList = userService.getUserByAll();
         List<ResponseUser> result = new ArrayList<>();
-        userList.forEach(v-> {
+        userList.forEach(v -> {
             result.add(new ModelMapper().map(v, ResponseUser.class));
         });
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<ResponseUser> getUsers(@PathVariable("userId") String userId){
+    public ResponseEntity<ResponseUser> getUsers(@PathVariable("userId") String userId) {
         UserDto userDto = userService.getUserByUserId(userId);
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);

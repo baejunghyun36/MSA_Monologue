@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-//    @Autowired
+    //    @Autowired
     UserRepository userRepository;
     BCryptPasswordEncoder passwordEncoder;
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
     //Service 클래스 빈으로 등록될 때 생성자 호출이 되는데, 생성자 안에서 생성되었던 놈들도 초기화가 되어야하는데,
     //passwordEncoder는 Bean을 주입한 적이 없다. 기동 클래스에서 Bean을 등록해야한다.
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder){
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
