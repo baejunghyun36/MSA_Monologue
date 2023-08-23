@@ -20,6 +20,7 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+
         - id: order-service
           uri: lb://ORDER-SERVICE
           #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
@@ -31,13 +32,39 @@ spring:
           #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
           predicates:
             - Path=/catalog-service/**
+
+
         - id: user-service
           uri: lb://USER-SERVICE
-          #         클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          # 클라이언트가 user-service login로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+#            - CustomFilter
+        - id: user-service
+          uri: lb://USER-SERVICE
+          # 클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          # 클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
           predicates:
             - Path=/user-service/**
+            - Method=GET
           filters:
-            - CustomFilter
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
+
         - id: second-service
           uri: lb://MY-SECOND-SERVICE
           predicates:
@@ -52,6 +79,9 @@ spring:
                 preLogger: true
                 postLogger: true
 
+token:
+  # 현재 임의의 값 최소 50글자
+  secret: 01234567890123456789012345678901234567890123456789
 
 #  라우트 설정.
 #  cloud:
@@ -65,3 +95,4 @@ spring:
 #          uri: http://localhost:8082/
 #          predicates:
 #            - Path=/second-service/**
+
