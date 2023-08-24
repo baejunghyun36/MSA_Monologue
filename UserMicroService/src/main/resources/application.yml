@@ -34,8 +34,15 @@ logging:
   level:
     com.example.userservice: DEBUG
 
-token:
-  # 하루짜리 토큰
-  expiration_time: 86400000
-  # 현재 임의의 값 최소 50글자
-  secret: 01234567890123456789012345678901234567890123456789
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
+#token:
+#  # 하루짜리 토큰
+#  expiration_time: 86400000
+#  # 현재 임의의 값 최소 50글자
+
+#  secret: 01234567890123456789012345678901234567890123456789

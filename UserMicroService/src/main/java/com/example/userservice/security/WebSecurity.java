@@ -11,10 +11,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -55,10 +51,10 @@ public class WebSecurity { //websecurityConfigurerAdapter deprecated 됨.
         http.csrf().disable();
                 //.authorizeRequests()
                 //.antMatchers("/users/**").permitAll();
-        //허용할 수 있는 것. users 관련 api 모두 혀용.
-        String IP_ADDRESS = "127.0.0.1";
+
         http.authorizeRequests()
                 .antMatchers("/error/**").permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/**")
                 .hasIpAddress("127.0.0.1")// ip 변경
 //                .access("hasIpAddress('" + IP_ADDRESS + "')")
