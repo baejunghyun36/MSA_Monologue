@@ -3,8 +3,21 @@ server:
 spring:
   application:
     name: config-service
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+
   cloud:
     config:
       server:
         git:
           uri: C:/Users/bae10/Desktop/MSA_YML/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh

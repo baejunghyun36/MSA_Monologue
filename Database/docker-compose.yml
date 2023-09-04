@@ -10,7 +10,7 @@ services:
       MARIADB_USER: root
       MARIADB_ROOT_PASSWORD: 1q2w3e4r!
     ports:
-      - 3307:3306
+      - 3305:3306
     volumes:
       - type: volume
         source: mariadb

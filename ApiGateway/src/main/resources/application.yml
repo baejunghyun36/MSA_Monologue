@@ -11,6 +11,11 @@ eureka:
 spring:
   application:
     name: apigateway-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
   cloud:
     gateway:
       default-filters:
@@ -65,6 +70,16 @@ spring:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter
 
+        - id: user-service
+          uri: lb://USER-SERVICE
+          # 클라이언트가 user-service로 시작되는 모든 요청을 USER-SERVICE쪽으로 포워딩 시킨다.
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
         - id: second-service
           uri: lb://MY-SECOND-SERVICE
           predicates:
@@ -79,9 +94,23 @@ spring:
                 preLogger: true
                 postLogger: true
 
+
+
+
+
 token:
   # 현재 임의의 값 최소 50글자
   secret: 01234567890123456789012345678901234567890123456789
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh
+
+
+
 
 #  라우트 설정.
 #  cloud:
@@ -95,4 +124,3 @@ token:
 #          uri: http://localhost:8082/
 #          predicates:
 #            - Path=/second-service/**
-

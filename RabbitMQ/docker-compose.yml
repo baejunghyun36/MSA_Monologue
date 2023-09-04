@@ -1,0 +1,13 @@
+version: "3"
+services:
+  rabbit1:
+    image: lucifer8591/rabbitmq-server:3.7.17
+    container_name: rabbit
+    hostname: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${e_RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${e_RABBITMQ_DEFAULT_PASS:-admin}
+

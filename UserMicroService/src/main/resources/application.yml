@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: user-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,7 +18,7 @@ spring:
     show-sql: true
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3307/msa?serverTimezone=KST&characterEncoding=UTF-8&useSSL=false&useUnicode=true
+    url: jdbc:mariadb://localhost:3305/msa?serverTimezone=KST&characterEncoding=UTF-8&useSSL=false&useUnicode=true
     username: root
     password: 1q2w3e4r!
 
@@ -38,7 +43,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans
+        include: refresh, health, beans, busrefresh
 
 #token:
 #  # 하루짜리 토큰
