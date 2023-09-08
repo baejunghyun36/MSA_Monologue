@@ -14,7 +14,7 @@ spring:
     config:
       server:
         git:
-          uri: C:/Users/bae10/Desktop/MSA_YML/
+          uri: C:/Users/bae10/Desktop/MSA_YML
 
 management:
   endpoints:

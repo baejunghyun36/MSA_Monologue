@@ -7,8 +7,8 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672
-    username: admin
-    password: admin
+    username: guest
+    password: guest
   jpa:
     hibernate:
       ddl-auto: update
@@ -49,5 +49,4 @@ management:
 #  # 하루짜리 토큰
 #  expiration_time: 86400000
 #  # 현재 임의의 값 최소 50글자
-
 #  secret: 01234567890123456789012345678901234567890123456789
